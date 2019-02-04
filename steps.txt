@@ -12,3 +12,10 @@ Create new folder and open in terminal
 #sudo lsof -t -i tcp:8000 | xargs kill -9
 #python3 manage.py startapp authenticate
 #add authenticate to settings.py
+#create folder to hold app
+#create urls.py folder
+#create templates folder with html file for views
+#
+#
+#
+#
