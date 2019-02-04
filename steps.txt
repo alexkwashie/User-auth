@@ -1,8 +1,14 @@
+pip3 install virtualenv
+virtualenv .
+source bin/activate
+pip freeze
+pip install django
+Create new folder and open in terminal
 #django-admin.py startproject mysite .
 #python manage.py runserver
 #python manage.py migrate
 #python manage.py migrate go to /admin -url
-#
-#
+#python3 manage.py createsuperuser
+#sudo lsof -t -i tcp:8000 | xargs kill -9
 #
 #
