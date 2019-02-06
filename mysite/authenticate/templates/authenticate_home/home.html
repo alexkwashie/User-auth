@@ -4,4 +4,8 @@
 
 <h1>This is a new day</h1>
 
+{% if user.is_authenticated %}
+    <p>Hello {{user.username}}, You have successfully login in</p>
+
+{% endif %}
 {% endblock %}

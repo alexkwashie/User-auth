@@ -32,31 +32,41 @@
         <li class="nav-item">
           <a class="nav-link" href="#">Pricing</a>
         </li>
-
     </div>
+
     <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
       <ul class="navbar-nav ml-auto">
+        <!--Logout page-->
+        {% if user.is_authenticated %} <!---if user is logged in show login else show logout-->
         <li class="nav-item">
-          <a class="nav-link" href="{%url 'login'%}">Login</a>
+          <a class="nav-link" href="{% url 'logout' %}">Logout</a></li>
+        {% else %}
+        <!--Login page-->
+        <li class="nav-item">
+          <a class="nav-link" href="{%url 'login'%}">Login</a></li>
+        {% endif %}
       </ul>
     </div>
     </ul>
+
     </div>
   </nav>
 
   <br>
-
+<!---Show success message-->
   <div class="container">
     {% if messages%}
-      {% for message in messages %}
+    {% for message in messages %}
     <div class="alert alert-success" role="alert">
-        {{message}}
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">x</button>
+      {{message}}
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">x</button>
     </div>
-      {% endfor %}
-    {% endif  %}
+    {% endfor %}
+    {% endif %}
 
 
+
+<!--Export page content to other pages-->
     {% block content%}
     {% endblock%}
   </div>

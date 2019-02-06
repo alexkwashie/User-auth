@@ -6,6 +6,7 @@ from django.contrib  import messages
 def home(request):
     return render (request, 'authenticate_home/home.html', {})
 
+#login function
 def login_user(request):
     if request.method =='POST':
         username = request.POST['username']
@@ -22,3 +23,12 @@ def login_user(request):
     else:
         return render (request, 'authenticate_home/login.html', {})
 
+#Logout function
+def logout_user(request):
+    logout(request)
+    messages.success(request,('You have logged out!'))
+    return redirect('home')
+
+
+def register_user(request):
+    return render (request, 'authenticate_home/register.html', {})
