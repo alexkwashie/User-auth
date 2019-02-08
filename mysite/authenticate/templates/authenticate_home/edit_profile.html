@@ -1,0 +1,29 @@
+{% extends 'authenticate_home/base.html' %}
+
+{% block content %}
+
+<div class="col-md-6 offset-md-3">
+<h2 class="text-center">Edit Profile</h2>
+
+<form method="POST" action="{% url 'edit_profile' %}">
+
+        {% csrf_token%}
+
+        {% if form.errors %} <!--if from validation is error-->
+            <div class="alert alert-success" role="alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close">x</button>
+        <p>An Errors has occured</p>
+        {% for field in form %}
+            {% if field.errors %}
+                    {{field.errors}}
+                     {%endif%}
+                    {% endfor %}
+                    </div>
+
+        {%endif%}
+
+        {{form.as_p}}
+        <br>
+        <button type="submit" class="btn btn-secondary">Submit</button>
+        </form>
+</div>
+{% endblock %}

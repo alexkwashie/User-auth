@@ -1,8 +1,9 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login , logout
 from django.contrib  import messages
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 from .forms import SignUpForm # from form.py
+from .forms  import editProfileForm
 
 # Create your views here.
 def home(request):
@@ -34,18 +35,32 @@ def logout_user(request):
 
 def register_user(request):
     if request.method =='POST':
-         form = SignUpForm(request.POST)
+         form = SignUpForm(request.POST) #use this to allow user sign up form
          if form.is_valid():
              form.save()
              username = form.cleaned_data['username']
              password = form.cleaned_data['password1']
              user = authenticate(request, username=username, password=password)
              login(request, user)
-             messages.success(request,('Thank you for youregistration'))
-             return redirect('login')
+             messages.success(request,('Thank you for you registration'))
+             return redirect('home')
 
     else:
         form = SignUpForm()
 
     context = {'form': form}
     return render (request, 'authenticate_home/register.html', context)
+
+def edit_profile(request):
+    if request.method =='POST':
+         form = editProfileForm(request.POST, instance = request.user) #use this to allow changing form
+         if form.is_valid():
+             form.save()
+             messages.success(request,('Thank you, Your details have been amended'))
+             return redirect('home')
+
+    else:
+        form = editProfileForm(instance = request.user) #use this to allow changing form
+
+    context = {'form': form}
+    return render (request, 'authenticate_home/edit_profile.html', context)

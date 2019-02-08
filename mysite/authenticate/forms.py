@@ -2,6 +2,15 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User #this  is soley for database purposes
 from django import forms
 
+#creat function to remove suplus words from webpage
+class editProfileForm(UserCreationForm):
+
+    class Meta:
+        model = User
+        fields = ('username', 'first_name', 'last_name','email',)
+
+
+
 #Use Widgets on django doc to add styling to the from
 class SignUpForm(UserCreationForm):
     email = forms.EmailField(label= "Enter Email",widget=forms.TextInput(attrs={'class':'form-control'}))
