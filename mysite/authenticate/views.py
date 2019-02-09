@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
-from django.contrib.auth import authenticate, login , logout
+from django.contrib.auth import authenticate, login , logout, update_session_auth_hash
 from django.contrib  import messages
-from django.contrib.auth.forms import UserCreationForm, UserChangeForm
+from django.contrib.auth.forms import UserCreationForm, UserChangeForm, PasswordChangeForm
 from .forms import SignUpForm # from form.py
 from .forms  import editProfileForm
 
@@ -64,3 +64,19 @@ def edit_profile(request):
 
     context = {'form': form}
     return render (request, 'authenticate_home/edit_profile.html', context)
+
+
+def change_password(request):
+    if request.method =='POST':
+        form = PasswordChangeForm(data = request.POST,user = request.user) #use 'data' here to request post
+        if form.is_valid():
+            form.save()
+            update_session_auth_hash(request, form.user)#use this to prevent it from login user out
+            messages.success(request,('Thank you, Your details have been amended'))
+            return redirect('home')
+
+    else:
+        form = PasswordChangeForm(user = request.user) #use this to allow changing form
+
+    context = {'form': form}
+    return render (request, 'authenticate_home/change_password.html', context)

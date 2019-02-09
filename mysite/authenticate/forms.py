@@ -5,9 +5,12 @@ from django import forms
 #creat function to remove suplus words from webpage
 class editProfileForm(UserCreationForm):
 
+    password= forms.EmailField(widget=forms.TextInput(attrs={'type':'hidden'}))
+    password2 = forms.EmailField(widget=forms.TextInput(attrs={'type':'hidden'}))
+    password1 = forms.EmailField(widget=forms.TextInput(attrs={'type':'hidden'}))
     class Meta:
         model = User
-        fields = ('username', 'first_name', 'last_name','email',)
+        fields = ('username', 'first_name', 'last_name','email', 'password',)
 
 
 
